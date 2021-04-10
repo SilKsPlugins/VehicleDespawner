@@ -14,34 +14,27 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Reference Include="Assembly-CSharp">
-			<HintPath>C:\Unturned Development\Unturned_Data\Managed\Assembly-CSharp.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Assembly-CSharp-firstpass">
-			<HintPath>C:\Unturned Development\Unturned_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Rocket.API">
-			<HintPath>C:\Unturned Development\Extras\Rocket.Unturned\Rocket.API.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Rocket.Core">
-			<HintPath>C:\Unturned Development\Extras\Rocket.Unturned\Rocket.Core.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="Rocket.Unturned">
-			<HintPath>C:\Unturned Development\Extras\Rocket.Unturned\Rocket.Unturned.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="UnityEngine">
-			<HintPath>C:\Unturned Development\Unturned_Data\Managed\UnityEngine.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
-		<Reference Include="UnityEngine.CoreModule">
-			<HintPath>C:\Unturned Development\Unturned_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
-			<Private>false</Private>
-		</Reference>
+	  <PackageReference Include="OpenMod.UnityEngine.Redist" Version="2019.4.10">
+	    <IncludeAssets>compile</IncludeAssets>
+	  </PackageReference>
+	  <PackageReference Include="OpenMod.Unturned.Redist" Version="3.21.13">
+	    <IncludeAssets>compile</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Reference Include="Rocket.API">
+	    <HintPath>lib\Rocket.API.dll</HintPath>
+	    <Private>false</Private>
+	  </Reference>
+	  <Reference Include="Rocket.Core">
+	    <HintPath>lib\Rocket.Core.dll</HintPath>
+	    <Private>false</Private>
+	  </Reference>
+	  <Reference Include="Rocket.Unturned">
+	    <HintPath>lib\Rocket.Unturned.dll</HintPath>
+	    <Private>false</Private>
+	  </Reference>
 	</ItemGroup>
 
 </Project>
