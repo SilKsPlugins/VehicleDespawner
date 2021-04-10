@@ -26,8 +26,8 @@ jobs:
     - name: Zip Rocket release artifacts
       run: |
         mkdir -p ./Rocket/Plugins ./Rocket/Libraries
-        cd "./CodeLocks - Rocket/bin/Release/net461"
-        mv CodeLocks.dll ../../../../Rocket/Plugins
+        cd "./VehicleDespawner - Rocket/bin/Release/net461"
+        mv VehicleDespawner.dll ../../../../Rocket/Plugins
         mv *.dll ../../../../Rocket/Libraries
         mv product.json ../../../../Rocket
         cd ../../../../Rocket
@@ -37,8 +37,8 @@ jobs:
     - name: Zip OpenMod release artifacts
       run: |
         mkdir -p ./OpenMod/Plugins ./OpenMod/Libraries
-        cd "./CodeLocks - OpenMod/bin/Release/net461"
-        mv CodeLocks.dll ../../../../OpenMod/Plugins
+        cd "./VehicleDespawner - OpenMod/bin/Release/net461"
+        mv VehicleDespawner.dll ../../../../OpenMod/Plugins
         mv product.json ../../../../OpenMod
         cd ../../../../OpenMod
         zip -qr ./Release.zip *
@@ -51,7 +51,7 @@ jobs:
       with:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: ./Rocket/Release.zip
-        asset_name: CodeLocks-Rocket-v${{ github.event.release.tag_name }}.zip
+        asset_name: VehicleDespawner-Rocket-v${{ github.event.release.tag_name }}.zip
         asset_content_type: application/zip
     - name: Upload OpenMod release asset
       uses: actions/upload-release-asset@v1
@@ -60,5 +60,5 @@ jobs:
       with:
         upload_url: ${{ github.event.release.upload_url }}
         asset_path: ./OpenMod/Release.zip
-        asset_name: CodeLocks-OpenMod-v${{ github.event.release.tag_name }}.zip
+        asset_name: VehicleDespawner-OpenMod-v${{ github.event.release.tag_name }}.zip
         asset_content_type: application/zip
