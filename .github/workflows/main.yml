@@ -28,7 +28,6 @@ jobs:
         mkdir -p ./Rocket/Plugins ./Rocket/Libraries
         cd "./VehicleDespawner - Rocket/bin/Release/net461"
         mv VehicleDespawner.dll ../../../../Rocket/Plugins
-#        mv *.dll ../../../../Rocket/Libraries
         mv product.json ../../../../Rocket
         cd ../../../../Rocket
         zip -qr ./Release.zip *
