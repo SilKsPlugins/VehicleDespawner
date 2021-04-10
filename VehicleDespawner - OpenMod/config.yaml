@@ -1,0 +1,7 @@
+# Time (in seconds) between checks to despawn unused vehicles.
+# (Default: 30 seconds)
+CheckInterval: 30
+
+# Time (in seconds) which must pass without interaction for a vehicle to
+# be considered unused and be despawned. (Default: 2 days = 172800 seconds)
+UnusedDuration: 172800

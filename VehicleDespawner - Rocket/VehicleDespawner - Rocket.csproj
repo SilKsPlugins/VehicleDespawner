@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net461</TargetFramework>
+		<RootNamespace>SilK.VehicleDespawner</RootNamespace>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<AssemblyName>VehicleDespawner</AssemblyName>
+		<Authors>SilK</Authors>
+		<Company>SilK's Plugins</Company>
+		<Version>0.0.0</Version>
+		<Copyright>Copyright © SilK's Plugins 2021</Copyright>
+		<Product>VehicleDespawner</Product>
+		<LangVersion>8</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Reference Include="Assembly-CSharp">
+			<HintPath>C:\Unturned Development\Unturned_Data\Managed\Assembly-CSharp.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Assembly-CSharp-firstpass">
+			<HintPath>C:\Unturned Development\Unturned_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Rocket.API">
+			<HintPath>C:\Unturned Development\Extras\Rocket.Unturned\Rocket.API.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Rocket.Core">
+			<HintPath>C:\Unturned Development\Extras\Rocket.Unturned\Rocket.Core.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="Rocket.Unturned">
+			<HintPath>C:\Unturned Development\Extras\Rocket.Unturned\Rocket.Unturned.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine">
+			<HintPath>C:\Unturned Development\Unturned_Data\Managed\UnityEngine.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+		<Reference Include="UnityEngine.CoreModule">
+			<HintPath>C:\Unturned Development\Unturned_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>
+
+</Project>

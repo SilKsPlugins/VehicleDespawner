@@ -1,0 +1,64 @@
+name: VehicleDespawner Release
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Update versions
+      run: "sed -i \"s#<Version>0.0.0</Version>#<Version>${{ github.event.release.tag_name }}</Version>#\" \"VehicleDespawner - OpenMod/VehicleDespawner - OpenMod.csproj\" \"VehicleDespawner - Rocket/VehicleDespawner - Rocket.csproj\""
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    - name: Install zip
+      run: sudo apt-get install zip
+    - name: Zip Rocket release artifacts
+      run: |
+        mkdir -p ./Rocket/Plugins ./Rocket/Libraries
+        cd "./CodeLocks - Rocket/bin/Release/net461"
+        mv CodeLocks.dll ../../../../Rocket/Plugins
+        mv *.dll ../../../../Rocket/Libraries
+        mv product.json ../../../../Rocket
+        cd ../../../../Rocket
+        zip -qr ./Release.zip *
+        cd ..
+      shell: bash
+    - name: Zip OpenMod release artifacts
+      run: |
+        mkdir -p ./OpenMod/Plugins ./OpenMod/Libraries
+        cd "./CodeLocks - OpenMod/bin/Release/net461"
+        mv CodeLocks.dll ../../../../OpenMod/Plugins
+        mv product.json ../../../../OpenMod
+        cd ../../../../OpenMod
+        zip -qr ./Release.zip *
+        cd ..
+      shell: bash
+    - name: Upload Rocket release asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./Rocket/Release.zip
+        asset_name: CodeLocks-Rocket-v${{ github.event.release.tag_name }}.zip
+        asset_content_type: application/zip
+    - name: Upload OpenMod release asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./OpenMod/Release.zip
+        asset_name: CodeLocks-OpenMod-v${{ github.event.release.tag_name }}.zip
+        asset_content_type: application/zip
