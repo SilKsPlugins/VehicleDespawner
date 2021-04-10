@@ -37,4 +37,10 @@
 	  </Reference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="product.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>
