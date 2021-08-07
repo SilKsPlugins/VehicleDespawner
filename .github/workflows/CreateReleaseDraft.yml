@@ -52,7 +52,6 @@ jobs:
         mkdir -p ./Rocket/Plugins ./Rocket/Libraries
         cd "./${{ env.PLUGIN_NAME }} - Rocket/bin/Release/net461"
         mv "${{ env.PLUGIN_NAME }}.dll" ../../../../Rocket/Plugins
-        mv 0Harmony.dll ../../../../Rocket/Libraries
         mv product.json ../../../../Rocket
         cd ../../../../Rocket
         zip -qr ./Release.zip *
