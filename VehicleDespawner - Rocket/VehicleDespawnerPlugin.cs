@@ -124,36 +124,39 @@ namespace SilK.VehicleDespawner
 
             while (isActiveAndEnabled)
             {
-                var now = GetNow();
-                var respawnInterval = Configuration.Instance.UnusedDuration;
-
-                for (var i = LatestUpdates.Count - 1; i >= 0; i--)
+                if (VehicleManager.vehicles != null)
                 {
-                    var pair = LatestUpdates.ElementAt(i);
+                    var now = GetNow();
+                    var respawnInterval = Configuration.Instance.UnusedDuration;
 
-                    if (now - pair.Value <= respawnInterval) continue;
-
-                    var vehicle = VehicleManager.getVehicle(pair.Key);
-
-                    if (vehicle != null)
+                    for (var i = LatestUpdates.Count - 1; i >= 0; i--)
                     {
-                        if (vehicle.passengers.Any(x => x?.player != null))
-                        {
-                            LatestUpdates[pair.Key] = GetNow();
+                        var pair = LatestUpdates.ElementAt(i);
 
-                            continue;
+                        if (now - pair.Value <= respawnInterval) continue;
+
+                        var vehicle = VehicleManager.getVehicle(pair.Key);
+
+                        if (vehicle != null)
+                        {
+                            if (vehicle.passengers.Any(x => x?.player != null))
+                            {
+                                LatestUpdates[pair.Key] = GetNow();
+
+                                continue;
+                            }
+
+                            VehicleManager.askVehicleDestroy(vehicle);
                         }
 
-                        VehicleManager.askVehicleDestroy(vehicle);
+                        LatestUpdates.Remove(pair.Key);
                     }
 
-                    LatestUpdates.Remove(pair.Key);
-                }
-
-                foreach (var vehicle in VehicleManager.vehicles.Where(vehicle => vehicle != null))
-                {
-                    if (!LatestUpdates.ContainsKey(vehicle.instanceID))
-                        LatestUpdates.Add(vehicle.instanceID, now);
+                    foreach (var vehicle in VehicleManager.vehicles.Where(vehicle => vehicle != null))
+                    {
+                        if (!LatestUpdates.ContainsKey(vehicle.instanceID))
+                            LatestUpdates.Add(vehicle.instanceID, now);
+                    }
                 }
 
                 yield return new WaitForSeconds(Configuration.Instance.CheckInterval);
