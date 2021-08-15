@@ -34,8 +34,6 @@ namespace VehicleDespawner
         {
             LoadUpdates();
 
-            CheckLoop().Forget();
-
             Level.onPostLevelLoaded += OnPostLevelLoaded;
             Provider.onServerShutdown += SaveUpdates;
 
@@ -47,7 +45,7 @@ namespace VehicleDespawner
 
         private void OnPostLevelLoaded(int level)
         {
-            CheckLoop().Forget();
+            UniTask.RunOnThreadPool(CheckLoop);
         }
 
         protected override UniTask OnUnloadAsync()
@@ -122,6 +120,8 @@ namespace VehicleDespawner
         {
             await UniTask.Delay(10000, cancellationToken: _cancellationToken.Token);
 
+            await UniTask.SwitchToMainThread();
+
             for (var i = LatestUpdates.Count - 1; i >= 0; i--)
             {
                 var instanceId = LatestUpdates.ElementAt(i).Key;
@@ -132,8 +132,12 @@ namespace VehicleDespawner
                     LatestUpdates.Remove(instanceId);
             }
 
+            await UniTask.SwitchToThreadPool();
+
             while (!_cancellationToken.IsCancellationRequested)
             {
+                await UniTask.SwitchToMainThread();
+
                 if (VehicleManager.vehicles != null)
                 {
                     var now = GetNow();
@@ -168,6 +172,8 @@ namespace VehicleDespawner
                             LatestUpdates.Add(vehicle.instanceID, now);
                     }
                 }
+
+                await UniTask.SwitchToThreadPool();
 
                 await UniTask.Delay((int) (_configuration.GetValue<float>("CheckInterval", 30) * 1000),
                     cancellationToken: _cancellationToken.Token);
